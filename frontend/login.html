@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Log in to your account.">
+  <title>Login | CodeAlpha Store</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/navbar.css">
+  <link rel="stylesheet" href="css/auth.css">
+  <link rel="stylesheet" href="css/footer.css">
+  <link rel="stylesheet" href="css/responsive.css">
+</head>
+<body>
+
+  <!-- Header -->
+  <header>
+    <nav class="navbar">
+      <a href="index.html" class="nav-brand">
+        <span>🛍️</span> CodeAlpha Store
+      </a>
+      <ul class="nav-links">
+        <li><a href="index.html" class="nav-link">Home</a></li>
+        <li><a href="products.html" class="nav-link">Catalog</a></li>
+      </ul>
+      <div class="nav-actions">
+        <a href="cart.html" class="cart-icon-container">
+          🛒
+          <span class="cart-badge" style="display: none;">0</span>
+        </a>
+        <div id="nav-auth-container">
+          <!-- Dynamically Loaded -->
+        </div>
+      </div>
+    </nav>
+  </header>
+
+  <!-- Main Content -->
+  <main>
+    <div class="auth-container">
+      <div class="card auth-card">
+        <div class="auth-header">
+          <h2>Welcome Back</h2>
+          <p style="margin-top: 5px;">Enter your credentials to log into your account</p>
+        </div>
+
+        <div id="alert-container"></div>
+
+        <form id="login-form">
+          <div class="form-group">
+            <label for="email">Email Address</label>
+            <input type="email" id="email" class="form-control" placeholder="name@domain.com" required autocomplete="email">
+          </div>
+          
+          <div class="form-group">
+            <label for="password">Password</label>
+            <input type="password" id="password" class="form-control" placeholder="••••••••" required autocomplete="current-password">
+          </div>
+
+          <button type="submit" id="login-submit-btn" class="btn btn-primary btn-auth-submit">
+            Log In
+          </button>
+        </form>
+
+        <div class="auth-footer">
+          Don't have an account? <a href="register.html">Sign Up</a>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer>
+    <div class="footer-content">
+      <div class="footer-brand">
+        <h3>CodeAlpha Store</h3>
+        <p>Your one-stop destination for premium modern gear and tech items. Carefully curated for style and performance.</p>
+      </div>
+      <div class="footer-section">
+        <h4>Quick Links</h4>
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="products.html">Catalog</a></li>
+          <li><a href="cart.html">Shopping Cart</a></li>
+        </ul>
+      </div>
+      <div class="footer-section">
+        <h4>Help & Support</h4>
+        <ul>
+          <li><a href="#">FAQ</a></li>
+          <li><a href="#">Shipping Details</a></li>
+          <li><a href="#">Refund Policy</a></li>
+        </ul>
+      </div>
+      <div class="footer-section">
+        <h4>Subscribe</h4>
+        <p style="margin-bottom: 15px;">Get notified about special deals and early drops.</p>
+        <form class="newsletter-form" onsubmit="event.preventDefault(); alert('Subscribed!');">
+          <input type="email" placeholder="Your email address" required>
+          <button type="submit">➔</button>
+        </form>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2026 CodeAlpha Store. All rights reserved.</p>
+      <div class="footer-socials">
+        <a href="#" title="Twitter">𝕏</a>
+        <a href="#" title="Instagram">📸</a>
+        <a href="#" title="Facebook">📘</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="js/api.js"></script>
+  <script src="js/utils.js"></script>
+  <script src="js/main.js"></script>
+  <script src="js/auth.js"></script>
+</body>
+</html>

@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="View items in your cart and proceed to checkout.">
+  <title>Shopping Cart | CodeAlpha Store</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/navbar.css">
+  <link rel="stylesheet" href="css/cart.css">
+  <link rel="stylesheet" href="css/footer.css">
+  <link rel="stylesheet" href="css/responsive.css">
+</head>
+<body>
+
+  <!-- Header -->
+  <header>
+    <nav class="navbar">
+      <a href="index.html" class="nav-brand">
+        <span>🛍️</span> CodeAlpha Store
+      </a>
+      <ul class="nav-links">
+        <li><a href="index.html" class="nav-link">Home</a></li>
+        <li><a href="products.html" class="nav-link">Catalog</a></li>
+      </ul>
+      <div class="nav-actions">
+        <a href="cart.html" class="cart-icon-container">
+          🛒
+          <span class="cart-badge" style="display: none;">0</span>
+        </a>
+        <div id="nav-auth-container">
+          <!-- Dynamically Loaded -->
+        </div>
+      </div>
+    </nav>
+  </header>
+
+  <!-- Main Content -->
+  <main>
+    <h2 style="margin-bottom: 25px;">Shopping Cart</h2>
+
+    <div class="cart-wrapper">
+      <!-- Items table -->
+      <div class="card cart-table-container">
+        <table class="cart-table">
+          <thead>
+            <tr>
+              <th>Product</th>
+              <th>Price</th>
+              <th>Quantity</th>
+              <th>Total</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody id="cart-items-tbody">
+            <!-- Injected via js/cart.js -->
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Order Summary sidecard -->
+      <div class="card summary-card">
+        <h3 class="summary-title">Order Summary</h3>
+        <div class="summary-row">
+          <span>Subtotal</span>
+          <span id="summary-subtotal">Rs. 0.00</span>
+        </div>
+        <div class="summary-row">
+          <span>Shipping</span>
+          <span id="summary-shipping">Free</span>
+        </div>
+        <div class="summary-row">
+          <span>Estimated Tax</span>
+          <span id="summary-tax">Rs. 0.00</span>
+        </div>
+        <div class="summary-row total">
+          <span>Order Total</span>
+          <span id="summary-total">Rs. 0.00</span>
+        </div>
+        
+        <a href="checkout.html" class="btn btn-primary btn-checkout">
+          Proceed to Checkout ➔
+        </a>
+      </div>
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer>
+    <div class="footer-content">
+      <div class="footer-brand">
+        <h3>CodeAlpha Store</h3>
+        <p>Your one-stop destination for premium modern gear and tech items. Carefully curated for style and performance.</p>
+      </div>
+      <div class="footer-section">
+        <h4>Quick Links</h4>
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="products.html">Catalog</a></li>
+          <li><a href="cart.html">Shopping Cart</a></li>
+        </ul>
+      </div>
+      <div class="footer-section">
+        <h4>Help & Support</h4>
+        <ul>
+          <li><a href="#">FAQ</a></li>
+          <li><a href="#">Shipping Details</a></li>
+          <li><a href="#">Refund Policy</a></li>
+        </ul>
+      </div>
+      <div class="footer-section">
+        <h4>Subscribe</h4>
+        <p style="margin-bottom: 15px;">Get notified about special deals and early drops.</p>
+        <form class="newsletter-form" onsubmit="event.preventDefault(); alert('Subscribed!');">
+          <input type="email" placeholder="Your email address" required>
+          <button type="submit">➔</button>
+        </form>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2026 CodeAlpha Store. All rights reserved.</p>
+      <div class="footer-socials">
+        <a href="#" title="Twitter">𝕏</a>
+        <a href="#" title="Instagram">📸</a>
+        <a href="#" title="Facebook">📘</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="js/api.js"></script>
+  <script src="js/utils.js"></script>
+  <script src="js/main.js"></script>
+  <script src="js/cart.js"></script>
+</body>
+</html>
