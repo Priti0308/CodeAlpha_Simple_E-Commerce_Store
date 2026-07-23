@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -11,6 +12,7 @@
   <link rel="stylesheet" href="css/footer.css">
   <link rel="stylesheet" href="css/responsive.css">
 </head>
+
 <body>
 
   <!-- Header -->
@@ -49,32 +51,26 @@
         <form id="register-form">
           <div class="form-group">
             <label for="name">Full Name</label>
-            <input type="text" id="name" class="form-control" placeholder="John Doe" required autocomplete="name">
+            <input type="text" id="name" class="form-control" placeholder="Enter Your Name" required
+              autocomplete="name">
           </div>
 
           <div class="form-group">
             <label for="email">Email Address</label>
-            <input type="email" id="email" class="form-control" placeholder="name@domain.com" required autocomplete="email">
+            <input type="email" id="email" class="form-control" placeholder="name@domain.com" required
+              autocomplete="email">
           </div>
-          
+
           <div class="form-group">
             <label for="password">Password</label>
-            <div class="password-input-container" style="position: relative;">
-              <input type="password" id="password" class="form-control" placeholder="••••••••" required autocomplete="new-password" style="padding-right: 45px;">
-              <button type="button" class="password-toggle-btn" style="position: absolute; right: 12px; top: 50%; transform: translateY(-50%); background: none; border: none; padding: 0; color: var(--text-secondary); cursor: pointer; display: flex; align-items: center; justify-content: center; height: 24px; width: 24px;">
-                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="eye-icon"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg>
-              </button>
-            </div>
+            <input type="password" id="password" class="form-control" placeholder="••••••••" required
+              autocomplete="new-password">
           </div>
 
           <div class="form-group">
             <label for="confirmPassword">Confirm Password</label>
-            <div class="password-input-container" style="position: relative;">
-              <input type="password" id="confirmPassword" class="form-control" placeholder="••••••••" required autocomplete="new-password" style="padding-right: 45px;">
-              <button type="button" class="password-toggle-btn" style="position: absolute; right: 12px; top: 50%; transform: translateY(-50%); background: none; border: none; padding: 0; color: var(--text-secondary); cursor: pointer; display: flex; align-items: center; justify-content: center; height: 24px; width: 24px;">
-                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="eye-icon"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg>
-              </button>
-            </div>
+            <input type="password" id="confirmPassword" class="form-control" placeholder="••••••••" required
+              autocomplete="new-password">
           </div>
 
           <button type="submit" id="register-submit-btn" class="btn btn-primary btn-auth-submit">
@@ -94,7 +90,8 @@
     <div class="footer-content">
       <div class="footer-brand">
         <h3>CodeAlpha Store</h3>
-        <p>Your one-stop destination for premium modern gear and tech items. Carefully curated for style and performance.</p>
+        <p>Your one-stop destination for premium modern gear and tech items. Carefully curated for style and
+          performance.</p>
       </div>
       <div class="footer-section">
         <h4>Quick Links</h4>
@@ -137,4 +134,5 @@
   <script src="js/main.js"></script>
   <script src="js/auth.js"></script>
 </body>
+
 </html>

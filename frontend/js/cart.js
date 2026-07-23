@@ -94,7 +94,7 @@ function renderCart() {
       <td>${formatPrice(item.price * item.quantity)}</td>
       <td>
         <div style="display: flex; align-items: center; gap: 10px;">
-          <button class="btn btn-primary btn-checkout-single" data-id="${item.product}" style="padding: 6px 12px; font-size: 0.8rem; border-radius: 6px; white-space: nowrap;">⚡ Buy Now</button>
+          <button class="btn btn-primary btn-checkout-single" data-id="${item.product}" style="padding: 6px 12px; font-size: 0.8rem; border-radius: 6px; white-space: nowrap;">Buy Now</button>
           <button class="cart-action-btn btn-remove" data-id="${item.product}" style="margin: 0;">✕</button>
         </div>
       </td>

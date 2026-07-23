@@ -93,7 +93,7 @@ function renderDetails(product) {
           🛒 Add to Cart
         </button>
         <button class="btn btn-primary" id="btn-buy-now" style="flex: 1;">
-          ⚡ Buy Now
+          Buy Now
         </button>
       </div>
     </div>

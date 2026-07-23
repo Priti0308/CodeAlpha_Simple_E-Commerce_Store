@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -11,6 +12,7 @@
   <link rel="stylesheet" href="css/footer.css">
   <link rel="stylesheet" href="css/responsive.css">
 </head>
+
 <body>
 
   <!-- Header -->
@@ -50,12 +52,12 @@
             <span class="step-number">1</span>
             <h3 class="step-title">Shipping Address</h3>
           </div>
-          
+
           <div class="form-group">
             <label for="address">Street Address</label>
             <input type="text" id="address" class="form-control" placeholder="123 Main St, Apt 4" required>
           </div>
-          
+
           <div class="grid-2">
             <div class="form-group">
               <label for="city">City</label>
@@ -66,7 +68,7 @@
               <input type="text" id="postalCode" class="form-control" placeholder="94103" required>
             </div>
           </div>
-          
+
           <div class="form-group">
             <label for="country">Country</label>
             <input type="text" id="country" class="form-control" placeholder="United States" required>
@@ -79,29 +81,32 @@
             <span class="step-number">2</span>
             <h3 class="step-title">Payment Method</h3>
           </div>
-          
+
           <p style="color: var(--text-secondary); margin-bottom: 20px; font-size: 0.95rem;">
-            Payments are simulated. Pressing "Place Order" will perform an authorization check against sandbox environments.
+            Payments are simulated. Pressing "Place Order" will perform an authorization check against sandbox
+            environments.
           </p>
 
-          <div class="form-group" style="padding: 15px; background: rgba(255,255,255,0.02); border-radius:var(--radius-sm); border: 1px solid var(--border-color);">
+          <div class="form-group"
+            style="padding: 15px; background: rgba(255,255,255,0.02); border-radius:var(--radius-sm); border: 1px solid var(--border-color);">
             <label style="display: flex; align-items: center; gap: 10px; cursor: pointer; margin-bottom:0;">
               <input type="radio" name="payment" checked>
-              <span>💳 Credit Card (Simulated Direct Checkout)</span>
+              <span>Credit Card (Simulated Direct Checkout)</span>
             </label>
           </div>
         </div>
 
         <button type="submit" id="checkout-submit-btn" class="btn btn-primary btn-checkout" style="padding: 16px;">
-          🔒 Place Order & Pay
+          Place Order & Pay
         </button>
       </form>
 
       <!-- Review Cart Summary sidebar -->
       <div class="card summary-card">
         <h3 class="summary-title">Review Order</h3>
-        
-        <div id="checkout-items-review" style="margin-bottom: 20px; padding-bottom: 10px; border-bottom: 1px solid var(--border-color);">
+
+        <div id="checkout-items-review"
+          style="margin-bottom: 20px; padding-bottom: 10px; border-bottom: 1px solid var(--border-color);">
           <!-- Injected via js/checkout.js -->
         </div>
 
@@ -130,7 +135,8 @@
     <div class="footer-content">
       <div class="footer-brand">
         <h3>CodeAlpha Store</h3>
-        <p>Your one-stop destination for premium modern gear and tech items. Carefully curated for style and performance.</p>
+        <p>Your one-stop destination for premium modern gear and tech items. Carefully curated for style and
+          performance.</p>
       </div>
       <div class="footer-section">
         <h4>Quick Links</h4>
@@ -173,4 +179,5 @@
   <script src="js/main.js"></script>
   <script src="js/checkout.js"></script>
 </body>
+
 </html>
