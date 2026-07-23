@@ -88,9 +88,14 @@ function renderDetails(product) {
         <button class="qty-btn" id="qty-plus">+</button>
       </div>
 
-      <button class="btn btn-primary" id="btn-add-to-cart" style="width: 100%;">
-        🛒 Add to Cart
-      </button>
+      <div style="display: flex; gap: 15px; margin-top: 15px;">
+        <button class="btn btn-secondary" id="btn-add-to-cart" style="flex: 1;">
+          🛒 Add to Cart
+        </button>
+        <button class="btn btn-primary" id="btn-buy-now" style="flex: 1;">
+          ⚡ Buy Now
+        </button>
+      </div>
     </div>
   `;
 
@@ -98,6 +103,7 @@ function renderDetails(product) {
   document.getElementById('qty-minus').addEventListener('click', () => adjustQty(-1));
   document.getElementById('qty-plus').addEventListener('click', () => adjustQty(1));
   document.getElementById('btn-add-to-cart').addEventListener('click', handleDetailAddToCart);
+  document.getElementById('btn-buy-now').addEventListener('click', handleDetailBuyNow);
 }
 
 // Function to handle switching gallery images
@@ -161,4 +167,29 @@ function handleDetailAddToCart() {
   }
 
   alert(`${currentQuantity}x ${currentProduct.name} added to cart!`);
+}
+
+// Handle Buy Now directly from details page
+function handleDetailBuyNow() {
+  if (!currentProduct) return;
+
+  if (!isUserLoggedIn()) {
+    showToast('Please log in to purchase products', 'error');
+    setTimeout(() => {
+      window.location.href = 'login.html';
+    }, 1500);
+    return;
+  }
+
+  const item = {
+    product: currentProduct._id,
+    name: currentProduct.name,
+    price: currentProduct.price,
+    image: currentProduct.image,
+    category: currentProduct.category || 'Footwear',
+    quantity: currentQuantity
+  };
+
+  sessionStorage.setItem('checkoutItems', JSON.stringify([item]));
+  window.location.href = 'checkout.html?buyNow=true';
 }

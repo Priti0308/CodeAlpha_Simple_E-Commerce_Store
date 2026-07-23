@@ -93,7 +93,10 @@ function renderCart() {
       </td>
       <td>${formatPrice(item.price * item.quantity)}</td>
       <td>
-        <button class="cart-action-btn btn-remove" data-id="${item.product}">✕</button>
+        <div style="display: flex; align-items: center; gap: 10px;">
+          <button class="btn btn-primary btn-checkout-single" data-id="${item.product}" style="padding: 6px 12px; font-size: 0.8rem; border-radius: 6px; white-space: nowrap;">⚡ Buy Now</button>
+          <button class="cart-action-btn btn-remove" data-id="${item.product}" style="margin: 0;">✕</button>
+        </div>
       </td>
     `;
     tbody.appendChild(tr);
@@ -111,6 +114,17 @@ function renderCart() {
   });
   document.querySelectorAll('.btn-remove').forEach(btn => {
     btn.addEventListener('click', () => removeCartItem(btn.dataset.id));
+  });
+  document.querySelectorAll('.btn-checkout-single').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const id = btn.dataset.id;
+      const currentCart = JSON.parse(localStorage.getItem('cartItems')) || [];
+      const item = currentCart.find(x => x.product === id);
+      if (item) {
+        sessionStorage.setItem('checkoutItems', JSON.stringify([item]));
+        window.location.href = 'checkout.html?buyNow=true';
+      }
+    });
   });
 }
 

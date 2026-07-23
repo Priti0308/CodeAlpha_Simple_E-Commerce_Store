@@ -8,14 +8,27 @@ document.addEventListener('DOMContentLoaded', () => {
   checkoutForm.addEventListener('submit', handleOrderSubmit);
 });
 
+// Helper to get items for checkout (supports Single Item Buy Now vs Cart Checkout)
+function getCheckoutItems() {
+  const isBuyNow = new URLSearchParams(window.location.search).get('buyNow') === 'true';
+  if (isBuyNow) {
+    return JSON.parse(sessionStorage.getItem('checkoutItems')) || [];
+  }
+  return JSON.parse(localStorage.getItem('cartItems')) || [];
+}
+
 // Load the checkout price summaries from memory
 function getOrderTotals() {
-  const totals = JSON.parse(sessionStorage.getItem('orderTotals'));
-  if (totals) return totals;
+  const isBuyNow = new URLSearchParams(window.location.search).get('buyNow') === 'true';
+  // Only use pre-calculated orderTotals if it's a standard cart checkout
+  if (!isBuyNow) {
+    const totals = JSON.parse(sessionStorage.getItem('orderTotals'));
+    if (totals) return totals;
+  }
 
-  // Fallback calculation if session is missing
-  const cartItems = JSON.parse(localStorage.getItem('cartItems')) || [];
-  const itemsPrice = cartItems.reduce((acc, item) => acc + item.price * item.quantity, 0);
+  // Calculate totals on-the-fly for single-item checkout or fallback
+  const checkoutItems = getCheckoutItems();
+  const itemsPrice = checkoutItems.reduce((acc, item) => acc + item.price * item.quantity, 0);
   const shippingPrice = itemsPrice > 100 || itemsPrice === 0 ? 0 : 10;
   const taxPrice = Number((0.08 * itemsPrice).toFixed(2));
   const totalPrice = itemsPrice + shippingPrice + taxPrice;
@@ -25,19 +38,19 @@ function getOrderTotals() {
 
 // Display order details prior to booking
 function renderOrderReview() {
-  const cartItems = JSON.parse(localStorage.getItem('cartItems')) || [];
+  const checkoutItems = getCheckoutItems();
   const reviewContainer = document.getElementById('checkout-items-review');
   const totals = getOrderTotals();
 
   if (!reviewContainer) return;
 
-  if (cartItems.length === 0) {
+  if (checkoutItems.length === 0) {
     window.location.href = 'cart.html';
     return;
   }
 
   reviewContainer.innerHTML = '';
-  cartItems.forEach(item => {
+  checkoutItems.forEach(item => {
     const div = document.createElement('div');
     div.style.display = 'flex';
     div.style.justifyContent = 'space-between';
@@ -96,11 +109,11 @@ async function handleOrderSubmit(e) {
   const btnId = 'checkout-submit-btn';
   setButtonLoading(btnId, true, '🔒 Place Order & Pay');
 
-  const cartItems = JSON.parse(localStorage.getItem('cartItems')) || [];
+  const checkoutItems = getCheckoutItems();
   const totals = getOrderTotals();
 
   const orderData = {
-    orderItems: cartItems.map(item => ({
+    orderItems: checkoutItems.map(item => ({
       name: item.name,
       qty: item.quantity,
       image: item.image,
@@ -125,15 +138,21 @@ async function handleOrderSubmit(e) {
       email_address: JSON.parse(localStorage.getItem('userInfo')).email
     });
 
-    // Clear cart from local state & backend database
-    localStorage.removeItem('cartItems');
-    sessionStorage.removeItem('orderTotals');
-    updateCartBadge();
-    
-    try {
-      await API.delete('/cart');
-    } catch (dbErr) {
-      console.warn('Could not clear cart database record:', dbErr.message);
+    const isBuyNow = new URLSearchParams(window.location.search).get('buyNow') === 'true';
+    if (isBuyNow) {
+      // Clear single item checkout memory only
+      sessionStorage.removeItem('checkoutItems');
+    } else {
+      // Clear full cart from local state & backend database
+      localStorage.removeItem('cartItems');
+      sessionStorage.removeItem('orderTotals');
+      updateCartBadge();
+      
+      try {
+        await API.delete('/cart');
+      } catch (dbErr) {
+        console.warn('Could not clear cart database record:', dbErr.message);
+      }
     }
 
     showToast('Order placed and paid successfully! Redirecting...', 'success');
