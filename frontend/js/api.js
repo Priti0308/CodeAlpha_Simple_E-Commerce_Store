@@ -1,6 +1,6 @@
 const API_BASE_URL = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1'
   ? 'http://localhost:5000/api'
-  : 'https://your-backend-api-url.com/api'; // Replace with your deployed backend URL (e.g. Render, Railway)
+  : 'https://codealpha-simple-e-commerce-store-t4cs.onrender.com/api';
 const DEFAULT_TIMEOUT = 8000; // 8 seconds timeout
 
 const apiRequest = async (endpoint, method = 'GET', body = null, isAuthRequired = true, timeout = DEFAULT_TIMEOUT) => {
