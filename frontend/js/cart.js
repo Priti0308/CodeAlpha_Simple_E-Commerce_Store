@@ -7,11 +7,13 @@ document.addEventListener('DOMContentLoaded', () => {
 
 // Sync cart from database if logged in, then render
 async function loadCart() {
+  const localCartBefore = JSON.parse(localStorage.getItem('cartItems')) || [];
+
   if (isUserLoggedIn()) {
     try {
       const cartData = await API.get('/cart');
       if (cartData && Array.isArray(cartData.items)) {
-        const localCart = cartData.items.map(item => {
+        const dbCart = cartData.items.map(item => {
           if (!item || !item.product) return null;
           return {
             product: item.product._id,
@@ -22,8 +24,25 @@ async function loadCart() {
             quantity: item.quantity
           };
         }).filter(Boolean);
-        localStorage.setItem('cartItems', JSON.stringify(localCart));
+
+        // Merge local cart items into database cart items
+        const mergedCart = [...dbCart];
+        localCartBefore.forEach(localItem => {
+          const exists = mergedCart.find(dbItem => dbItem.product === localItem.product);
+          if (exists) {
+            exists.quantity = Math.max(exists.quantity, localItem.quantity);
+          } else {
+            mergedCart.push(localItem);
+          }
+        });
+
+        localStorage.setItem('cartItems', JSON.stringify(mergedCart));
         if (typeof updateCartBadge === 'function') updateCartBadge();
+
+        // If local items were merged and database is out of sync, update the database
+        if (localCartBefore.length > 0) {
+          syncCartToDatabase(mergedCart);
+        }
       }
     } catch (err) {
       console.warn('Could not sync user cart from database:', err.message);
@@ -31,6 +50,7 @@ async function loadCart() {
   }
   renderCart();
 }
+
 
 // Primary cart rendering routine
 function renderCart() {
