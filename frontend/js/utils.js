@@ -79,34 +79,58 @@ const showToast = (message, type = 'success') => {
     container = document.createElement('div');
     container.id = 'toast-container';
     container.style.position = 'fixed';
-    container.style.top = '20px';
-    container.style.right = '20px';
+    container.style.top = '24px';
+    container.style.right = '24px';
     container.style.zIndex = '9999';
     container.style.display = 'flex';
     container.style.flexDirection = 'column';
-    container.style.gap = '10px';
+    container.style.gap = '12px';
     document.body.appendChild(container);
   }
 
   const toast = document.createElement('div');
   toast.className = `alert alert-${type === 'error' ? 'danger' : type}`;
   toast.style.margin = '0';
-  toast.style.minWidth = '280px';
-  toast.style.boxShadow = 'var(--shadow-md)';
-  toast.style.backdropFilter = 'blur(10px)';
-  toast.style.border = '1px solid rgba(255,255,255,0.1)';
-  toast.style.borderRadius = 'var(--radius-sm)';
-  toast.style.padding = '12px 20px';
+  toast.style.minWidth = '320px';
+  toast.style.maxWidth = '400px';
+  toast.style.boxShadow = '0 10px 30px rgba(0,0,0,0.15)';
+  toast.style.backdropFilter = 'blur(12px)';
+  toast.style.webkitBackdropFilter = 'blur(12px)';
+  toast.style.borderRadius = '12px';
+  toast.style.padding = '14px 20px';
+  toast.style.display = 'flex';
+  toast.style.alignItems = 'center';
+  toast.style.gap = '12px';
+  toast.style.transition = 'all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275)';
   toast.style.animation = 'slideIn 0.3s ease forwards';
-  toast.innerHTML = message;
+  toast.style.border = type === 'error' 
+    ? '1px solid rgba(239, 68, 68, 0.2)' 
+    : '1px solid rgba(16, 185, 129, 0.2)';
+  
+  // Custom Icon
+  const iconSvg = type === 'error' 
+    ? `<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="toast-icon" style="color: var(--danger); flex-shrink: 0;"><circle cx="12" cy="12" r="10"></circle><line x1="15" y1="9" x2="9" y2="15"></line><line x1="9" y1="9" x2="15" y2="15"></line></svg>`
+    : `<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="toast-icon" style="color: var(--success); flex-shrink: 0;"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>`;
+
+  toast.innerHTML = `
+    ${iconSvg}
+    <div style="flex-grow: 1; font-size: 0.95rem; font-weight: 500; line-height: 1.4;">${message}</div>
+    <button class="toast-close-btn" style="background: none; border: none; color: inherit; opacity: 0.6; cursor: pointer; padding: 0; display: flex; align-items: center;" onclick="this.parentElement.remove()">
+      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+    </button>
+  `;
 
   container.appendChild(toast);
 
   // Auto-remove after 4 seconds
   setTimeout(() => {
     toast.style.animation = 'slideOut 0.3s ease forwards';
-    setTimeout(() => toast.remove(), 300);
-  }, 400);
+    setTimeout(() => {
+      if (toast.parentElement) {
+        toast.remove();
+      }
+    }, 300);
+  }, 4000);
 };
 
 // Disable submit button and add loading spinner
